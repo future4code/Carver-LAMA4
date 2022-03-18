@@ -1,12 +1,12 @@
-import * as bcrypt from "bcrypt";
+import { hashSync, compareSync, genSaltSync } from "bcryptjs"
+import {config} from 'dotenv'
 
-export const generateHash = async (string: string): Promise<string> => {
-    const rounds = Number(process.env.BCRYPT_COST);
-    const salt = await bcrypt.genSalt(rounds);
-    const result = await bcrypt.hash(string, salt)
-    return result
+config()
+
+export const generateHash = (plainText: string) : string  =>{
+    const rounds: number = Number(process.env.BCRYPT_COST)
+    const salt : string = genSaltSync(rounds)
+    return hashSync(plainText, salt)
 }
 
-export const compareThePasswordWithTheHash = async (string: string, hash: string):Promise<boolean> => {
-    return bcrypt.compare(string, hash);
-}
+export const compareHash = (plainText: string , hashText: string) : boolean => compareSync(plainText, hashText)

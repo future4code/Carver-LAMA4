@@ -3,6 +3,7 @@ import cors from 'cors'
 import {AddressInfo} from 'net'
 import { signupController } from "./controller/signupController"
 import { loginController } from "./controller/loginController"
+import { bandRegisterController } from "./controller/bandRegisterController"
 
 
 const app = express()
@@ -22,3 +23,4 @@ const server = app.listen (process.env.PORT || 3003, () => {
 
 app.post('/user/signup', signupController)
 app.post('/user/login', loginController)
+app.post('/band/register', bandRegisterController)

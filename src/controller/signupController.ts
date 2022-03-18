@@ -17,7 +17,7 @@ export const signupController = async (req: Request, res: Response) => {
         const id = generateId()
         const token = generateToken({id, userRoles: newUser.role})
         const hashPassword = await generateHash(newUser.password)
-        await signupData (id , newUser.name, newUser.email, newUser.password, newUser.role)
+        await signupData (id , newUser.name, newUser.email, hashPassword, newUser.role)
 
         if (!newUser.name || !newUser.email || !newUser.password || !newUser.role){
             res.statusCode = 404

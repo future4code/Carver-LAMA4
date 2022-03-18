@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { loginData } from "../data/loginData";
 import { generateToken } from "../services/authenticator";
-import { compareThePasswordWithTheHash } from "../services/hashManager";
+import { compareHash } from "../services/hashManager";
+
 
 
 export const loginController = async (req: Request, res: Response) : Promise<void> =>{
@@ -15,9 +16,9 @@ export const loginController = async (req: Request, res: Response) : Promise<voi
 
         const [user] = await loginData(email)
 
-        const passwordIsCorrect: boolean = await compareThePasswordWithTheHash(password, user.password)
+        const passwordIsCorrect: boolean = await compareHash(password, user.password)
 
-        if(!passwordIsCorrect){
+        if(passwordIsCorrect === false){
             res.statusCode = 401
             throw new Error ("Credenciais inválidas")
         }
