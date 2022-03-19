@@ -30,6 +30,7 @@ export const bandRegisterController = async (req: Request, res: Response) => {
         
         await bandRegisterData(id, bandInfo.name, bandInfo.music_genre, bandInfo.responsible)
         res.status(200).send({message: "Banda Cadastrada com sucesso"})
+        console.log(id)
 
     } catch (error: any) {
         res.status(500).send({message: error.message || error.sqlMessage || "Erro inesperado"})
