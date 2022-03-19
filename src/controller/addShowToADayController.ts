@@ -13,7 +13,7 @@ export const addShowtoADayController = async (req: Request, res: Response) =>{
         }
         const id = generateId()
 
-        await addShowToADayData (id, show.band_id, show.week_day, show.start_time, show.end_time)
+        await addShowToADayData (id, show.week_day, show.start_time, show.end_time, show.band_id,)
 
         if(show.start_time<8 || show.end_time>23){
             res.statusCode = 400
@@ -23,10 +23,10 @@ export const addShowtoADayController = async (req: Request, res: Response) =>{
             res.statusCode = 400
             throw new Error ("Somente é possível agendar o show para sexta, sabado ou domingo")
         }
-        else{
+    
             res.status(200).send({message: "Show criado com sucesso"})
 
-        }
+        
 
     } catch (error:any) {
         res.status(500).send({message: error.message || error.sqlMessage})
