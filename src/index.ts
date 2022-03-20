@@ -6,6 +6,7 @@ import { loginController } from "./controller/loginController"
 import { bandRegisterController } from "./controller/bandRegisterController"
 import { getBandDetailController } from "./controller/getBandDetailController"
 import { addShowtoADayController } from "./controller/addShowToADayController"
+import { getShowsController } from "./controller/getShowsController"
 
 
 const app = express()
@@ -28,3 +29,4 @@ app.post('/user/login', loginController)
 app.post('/band/register', bandRegisterController)
 app.get('/band/:id', getBandDetailController)
 app.post('/show/register', addShowtoADayController)
+app.get('/show', getShowsController)
